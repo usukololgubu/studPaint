@@ -23,5 +23,6 @@ namespace studPiant_VS2008
         {
             this.Text = Convert.ToString(e.Location);
         }
+
     }
 }
