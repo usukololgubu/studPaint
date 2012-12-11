@@ -38,6 +38,7 @@
             this.Name = "MainScreen";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainScreen_MouseDown);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainScreen_Paint);
             this.ResumeLayout(false);
 
         }

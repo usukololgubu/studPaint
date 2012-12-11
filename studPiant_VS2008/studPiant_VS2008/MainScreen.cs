@@ -12,7 +12,9 @@ namespace studPiant_VS2008
 {
     public partial class MainScreen : Form
     {
-        Point clck;
+        List<Shape> Shapes = new List<Shape>(); //Хранит все фигуры
+        Shape Shape; //Поле для хранения текущей фигуры
+        Pen pMain = new Pen(Color.Black);
 
         public MainScreen()
         {
@@ -21,8 +23,17 @@ namespace studPiant_VS2008
 
         private void MainScreen_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Text = Convert.ToString(e.Location);
+            Shape = new Cross(e.Location);
+            Shapes.Add(Shape);
+            this.Refresh();
         }
 
+        private void MainScreen_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (Shape p in this.Shapes)
+            { //Отрисовка готовых объектов
+                p.DrawWith(e.Graphics, pMain);
+            }
+        }
     }
 }
