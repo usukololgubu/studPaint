@@ -10,6 +10,7 @@ namespace studPiant_VS2008
     abstract class Shape
     {
         public abstract void DrawWith(Graphics g, Pen p);
+        public abstract void SaveTo(StreamWriter sw);
     }
 
     class Cross : Shape
@@ -26,6 +27,12 @@ namespace studPiant_VS2008
             g.DrawLine(p, C.X - 5, C.Y - 5, C.X + 5, C.Y + 5);
             g.DrawLine(p, C.X + 5, C.Y - 5, C.X - 5, C.Y + 5);
         }
+
+        public override void SaveTo(StreamWriter sw) //Сохранение
+        {
+            sw.WriteLine("Cross");
+            sw.WriteLine(Convert.ToString(C.X) + " " + Convert.ToString(C.Y));
+        }
     }
 
     class Line : Shape
@@ -41,6 +48,13 @@ namespace studPiant_VS2008
         public override void DrawWith(Graphics g, Pen p)
         {
             g.DrawLine(p, S.X, S.Y, F.X, F.Y);
+        }
+
+        public override void SaveTo(StreamWriter sw) //Сохранение
+        {
+            sw.WriteLine("Line");
+            sw.WriteLine(Convert.ToString(S.X) + " " + Convert.ToString(S.Y));
+            sw.WriteLine(Convert.ToString(F.X) + " " + Convert.ToString(F.Y));
         }
     }
 }

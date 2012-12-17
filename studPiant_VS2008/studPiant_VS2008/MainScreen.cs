@@ -70,5 +70,18 @@ namespace studPiant_VS2008
         {
             Figures = rdB_Positions.line;
         }
+
+        private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string curFile = "allFigures"; //Имя файла для записи
+            StreamWriter sw = new StreamWriter(curFile);
+
+            flagStart = false;
+            foreach (Shape p in this.Shapes)
+            {
+                p.SaveTo(sw);
+            }
+            sw.Close();
+        }
     }
 }
