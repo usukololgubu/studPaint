@@ -14,7 +14,7 @@ namespace studPiant_VS2008
 
     class Cross : Shape
     {
-        private Point C = new Point();
+        private Point C;
 
         public Cross(Point _C)
         {
@@ -25,6 +25,22 @@ namespace studPiant_VS2008
         {
             g.DrawLine(p, C.X - 5, C.Y - 5, C.X + 5, C.Y + 5);
             g.DrawLine(p, C.X + 5, C.Y - 5, C.X - 5, C.Y + 5);
+        }
+    }
+
+    class Line : Shape
+    {
+        private Point S, F;
+
+        public Line(Point _S, Point _F)
+        {
+            this.S = _S;
+            this.F = _F;
+        }
+
+        public override void DrawWith(Graphics g, Pen p)
+        {
+            g.DrawLine(p, S.X, S.Y, F.X, F.Y);
         }
     }
 }

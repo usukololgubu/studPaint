@@ -15,6 +15,10 @@ namespace studPiant_VS2008
         List<Shape> Shapes = new List<Shape>(); //Хранит все фигуры
         Shape Shape; //Поле для хранения текущей фигуры
         Pen pMain = new Pen(Color.Black);
+        enum rdB_Positions {cross, line};
+        rdB_Positions Figures = new rdB_Positions();
+        Boolean flagStart = false; //Флаг второй точки для линии
+        Point LS; //Поле для записи координат первой точки для линии
 
         public MainScreen()
         {
@@ -23,7 +27,28 @@ namespace studPiant_VS2008
 
         private void MainScreen_MouseDown(object sender, MouseEventArgs e)
         {
-            Shape = new Cross(e.Location);
+            switch (Figures)
+            {
+                case rdB_Positions.cross:
+                    flagStart = false;
+                    Shape = new Cross(e.Location);
+                    Refresh();
+                    break;
+                case rdB_Positions.line:
+                    if (!flagStart)
+                    {
+                        LS = e.Location;
+                        flagStart = true;
+                    }
+                    else
+                    {
+                        Shape = new Line(LS, e.Location);
+                        flagStart = false;
+                        Refresh();
+                    }
+                    break;
+            }
+            
             Shapes.Add(Shape);
             this.Refresh();
         }
@@ -34,6 +59,16 @@ namespace studPiant_VS2008
             { //Отрисовка готовых объектов
                 p.DrawWith(e.Graphics, pMain);
             }
+        }
+
+        private void rdButt_Cross_CheckedChanged(object sender, EventArgs e)
+        {
+            Figures = rdB_Positions.cross;
+        }
+
+        private void rdButt_Lines_CheckedChanged(object sender, EventArgs e)
+        {
+            Figures = rdB_Positions.line;
         }
     }
 }
