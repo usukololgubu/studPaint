@@ -22,6 +22,14 @@ namespace studPiant_VS2008
             C = _C;
         }
 
+        public Cross(StreamReader sr) // Загрузка
+        {
+            String line = sr.ReadLine();
+            string[] foo = line.Split(' ');
+            C.X = Convert.ToInt32(foo[0]);
+            C.Y = Convert.ToInt32(foo[1]);
+        }
+
         public override void DrawWith(Graphics g, Pen p)
         {
             g.DrawLine(p, C.X - 5, C.Y - 5, C.X + 5, C.Y + 5);
@@ -44,6 +52,19 @@ namespace studPiant_VS2008
             this.S = _S;
             this.F = _F;
         }
+        public Line(StreamReader sr) // Загрузка
+        {
+            string line = sr.ReadLine();
+            string[] foo = line.Split(' ');
+            S.X = Convert.ToInt32(foo[0]);
+            S.Y = Convert.ToInt32(foo[1]);
+
+            line = sr.ReadLine();
+            foo = line.Split(' ');
+            F.X = Convert.ToInt32(foo[0]);
+            F.Y = Convert.ToInt32(foo[1]);
+        }
+
 
         public override void DrawWith(Graphics g, Pen p)
         {

@@ -83,5 +83,32 @@ namespace studPiant_VS2008
             }
             sw.Close();
         }
+
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string curFile = "allFigures"; //Имя файла для записи
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) //Выбрать файл вручную
+            {
+                curFile = openFileDialog1.FileName;
+            }
+            StreamReader sr = new StreamReader(curFile);
+
+            while (!sr.EndOfStream)
+            {
+                string type = sr.ReadLine();
+                flagStart = false;
+                switch (type)
+                {
+                    case "Cross":
+                        Shapes.Add(new Cross(sr));
+                        break;
+                    case "Line":
+                        Shapes.Add(new Line(sr));
+                        break;
+                }
+            }
+            sr.Close();
+            Refresh();
+        }
     }
 }
