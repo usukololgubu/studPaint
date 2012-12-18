@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.grBox_Instruments = new System.Windows.Forms.GroupBox();
-            this.rdButt_Cross = new System.Windows.Forms.RadioButton();
             this.rdButt_Lines = new System.Windows.Forms.RadioButton();
+            this.rdButt_Cross = new System.Windows.Forms.RadioButton();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.создатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,18 +79,6 @@
             this.grBox_Instruments.TabStop = false;
             this.grBox_Instruments.Text = "ИНСТРУМЕНТЫ";
             // 
-            // rdButt_Cross
-            // 
-            this.rdButt_Cross.AutoSize = true;
-            this.rdButt_Cross.Location = new System.Drawing.Point(6, 19);
-            this.rdButt_Cross.Name = "rdButt_Cross";
-            this.rdButt_Cross.Size = new System.Drawing.Size(70, 17);
-            this.rdButt_Cross.TabIndex = 0;
-            this.rdButt_Cross.TabStop = true;
-            this.rdButt_Cross.Text = "КРЕСТЫ";
-            this.rdButt_Cross.UseVisualStyleBackColor = true;
-            this.rdButt_Cross.CheckedChanged += new System.EventHandler(this.rdButt_Cross_CheckedChanged);
-            // 
             // rdButt_Lines
             // 
             this.rdButt_Lines.AutoSize = true;
@@ -102,6 +90,18 @@
             this.rdButt_Lines.Text = "ЛИНИИ";
             this.rdButt_Lines.UseVisualStyleBackColor = true;
             this.rdButt_Lines.CheckedChanged += new System.EventHandler(this.rdButt_Lines_CheckedChanged);
+            // 
+            // rdButt_Cross
+            // 
+            this.rdButt_Cross.AutoSize = true;
+            this.rdButt_Cross.Location = new System.Drawing.Point(6, 19);
+            this.rdButt_Cross.Name = "rdButt_Cross";
+            this.rdButt_Cross.Size = new System.Drawing.Size(70, 17);
+            this.rdButt_Cross.TabIndex = 0;
+            this.rdButt_Cross.TabStop = true;
+            this.rdButt_Cross.Text = "КРЕСТЫ";
+            this.rdButt_Cross.UseVisualStyleBackColor = true;
+            this.rdButt_Cross.CheckedChanged += new System.EventHandler(this.rdButt_Cross_CheckedChanged);
             // 
             // файлToolStripMenuItem
             // 
@@ -192,6 +192,7 @@
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
             this.выходToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
             this.выходToolStripMenuItem.Text = "Вы&ход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // правкаToolStripMenuItem
             // 
@@ -351,11 +352,14 @@
             this.ClientSize = new System.Drawing.Size(589, 453);
             this.Controls.Add(this.grBox_Instruments);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainScreen";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainScreen_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainScreen_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainScreen_MouseMove);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainScreen_KeyDown);
             this.grBox_Instruments.ResumeLayout(false);
             this.grBox_Instruments.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

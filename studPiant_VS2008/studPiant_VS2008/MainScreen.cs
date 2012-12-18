@@ -13,10 +13,14 @@ namespace studPiant_VS2008
     public partial class MainScreen : Form
     {
         List<Shape> Shapes = new List<Shape>(); //Хранит все фигуры
-        Shape Shape; //Поле для хранения текущей фигуры
+        Shape tmpShape; //Поле для хранения мнимой фигуры
+
         Pen pMain = new Pen(Color.Black);
+        Pen pTemp = new Pen(Color.Gray);
+
         enum rdB_Positions {cross, line};
         rdB_Positions Figures = new rdB_Positions();
+
         Boolean flagStart = false; //Флаг второй точки для линии
         Point LS; //Поле для записи координат первой точки для линии
 
@@ -31,7 +35,7 @@ namespace studPiant_VS2008
             {
                 case rdB_Positions.cross:
                     flagStart = false;
-                    Shape = new Cross(e.Location);
+                    addShape(tmpShape);
                     Refresh();
                     break;
                 case rdB_Positions.line:
@@ -42,33 +46,46 @@ namespace studPiant_VS2008
                     }
                     else
                     {
-                        Shape = new Line(LS, e.Location);
+                        addShape(tmpShape);
                         flagStart = false;
                         Refresh();
                     }
                     break;
             }
-            
-            Shapes.Add(Shape);
+            //Shapes.Add(tmpShape);
             this.Refresh();
         }
 
         private void MainScreen_Paint(object sender, PaintEventArgs e)
         {
+            if (tmpShape != null) //Отрисовка мнимого объекта
+            {
+                tmpShape.DrawWith(e.Graphics, pTemp);
+            }
+
             foreach (Shape p in this.Shapes)
             { //Отрисовка готовых объектов
                 p.DrawWith(e.Graphics, pMain);
             }
         }
 
+        private void addShape(Shape shape)
+        {
+            Shapes.Add(shape);
+        }
+
         private void rdButt_Cross_CheckedChanged(object sender, EventArgs e)
         {
             Figures = rdB_Positions.cross;
+            tmpShape = null;
+            Refresh();
         }
 
         private void rdButt_Lines_CheckedChanged(object sender, EventArgs e)
         {
             Figures = rdB_Positions.line;
+            tmpShape = null;
+            Refresh();
         }
 
         private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,6 +126,42 @@ namespace studPiant_VS2008
             }
             sr.Close();
             Refresh();
+        }
+
+        private void MainScreen_MouseMove(object sender, MouseEventArgs e)
+        {
+            switch (Figures)
+            {
+                case rdB_Positions.cross:
+                    tmpShape = new Cross(e.Location);
+                    Refresh();
+                    break;
+                case rdB_Positions.line:
+                    if (!flagStart)
+                    {
+                        LS = e.Location;
+                        Refresh();
+                    }
+                    else
+                    {
+                        tmpShape = new Line(LS, e.Location);
+                        Refresh();
+                    }
+                    break;
+            }
+        }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void MainScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Application.Exit();
+            }
         }
     }
 }
