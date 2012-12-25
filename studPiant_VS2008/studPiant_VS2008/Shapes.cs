@@ -9,6 +9,8 @@ namespace studPiant_VS2008
 {
     abstract class Shape
     {
+        public abstract string DescriptionString { get; }
+
         public abstract void DrawWith(Graphics g, Pen p);
         public abstract void SaveTo(StreamWriter sw);
     }
@@ -16,6 +18,14 @@ namespace studPiant_VS2008
     class Cross : Shape
     {
         private Point C;
+
+        public override string DescriptionString
+        {
+            get
+            {
+                return "Cross {X=" + C.X + ",Y=" + C.Y + "}";
+            }
+        }
 
         public Cross(Point _C)
         {
@@ -46,6 +56,14 @@ namespace studPiant_VS2008
     class Line : Shape
     {
         private Point S, F;
+
+        public override string DescriptionString
+        {
+            get
+            {
+                return "Line " + S + "; " + F;
+            }
+        }
 
         public Line(Point _S, Point _F)
         {
@@ -83,6 +101,14 @@ namespace studPiant_VS2008
     {
         private Point C, onR;
         Pen p = new Pen(Color.Black);
+
+        public override string DescriptionString
+        {
+            get
+            {
+                return "Circle {C=" + C + ",onR=" + onR + "}";
+            }
+        }
 
         public float Radius
         {

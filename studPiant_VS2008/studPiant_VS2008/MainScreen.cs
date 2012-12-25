@@ -86,6 +86,7 @@ namespace studPiant_VS2008
         private void addShape(Shape shape)
         {
             Shapes.Add(shape);
+            shapesList.Items.Add(shape.DescriptionString);
         }
 
         private void rdButt_Cross_CheckedChanged(object sender, EventArgs e)
@@ -198,6 +199,30 @@ namespace studPiant_VS2008
             {
                 Application.Exit();
             }
+        }
+
+        private void shapesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Refresh();
+        }
+
+        private void butt_ClearSelected_Click(object sender, EventArgs e)
+        {
+            while (shapesList.SelectedIndices.Count > 0)
+            {
+                Shapes.RemoveAt(shapesList.SelectedIndices[0]);
+                shapesList.Items.RemoveAt(shapesList.SelectedIndices[0]);
+            }
+        }
+
+        private void butt_ClearAll_Click(object sender, EventArgs e)
+        {
+            Shapes.Clear();
+            shapesList.ClearSelected();
+            shapesList.Items.Clear();
+            flagStart = false;
+            tmpShape = null;
+            Refresh();
         }
     }
 }

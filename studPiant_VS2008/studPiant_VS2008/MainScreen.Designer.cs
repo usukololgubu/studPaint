@@ -65,6 +65,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.rdButt_Circle = new System.Windows.Forms.RadioButton();
+            this.shapesList = new System.Windows.Forms.ListBox();
+            this.butt_ClearSelected = new System.Windows.Forms.Button();
+            this.butt_ClearAll = new System.Windows.Forms.Button();
             this.grBox_Instruments.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -74,12 +77,12 @@
             this.grBox_Instruments.Controls.Add(this.rdButt_Circle);
             this.grBox_Instruments.Controls.Add(this.rdButt_Lines);
             this.grBox_Instruments.Controls.Add(this.rdButt_Cross);
-            this.grBox_Instruments.Location = new System.Drawing.Point(438, 349);
+            this.grBox_Instruments.Location = new System.Drawing.Point(406, 348);
             this.grBox_Instruments.Name = "grBox_Instruments";
-            this.grBox_Instruments.Size = new System.Drawing.Size(139, 92);
+            this.grBox_Instruments.Size = new System.Drawing.Size(171, 93);
             this.grBox_Instruments.TabIndex = 0;
             this.grBox_Instruments.TabStop = false;
-            this.grBox_Instruments.Text = "ИНСТРУМЕНТЫ";
+            this.grBox_Instruments.Text = "ФИГУРЫ";
             // 
             // rdButt_Lines
             // 
@@ -352,24 +355,59 @@
             this.rdButt_Circle.AutoSize = true;
             this.rdButt_Circle.Location = new System.Drawing.Point(6, 65);
             this.rdButt_Circle.Name = "rdButt_Circle";
-            this.rdButt_Circle.Size = new System.Drawing.Size(53, 17);
+            this.rdButt_Circle.Size = new System.Drawing.Size(61, 17);
             this.rdButt_Circle.TabIndex = 2;
             this.rdButt_Circle.TabStop = true;
-            this.rdButt_Circle.Text = "КРУГ";
+            this.rdButt_Circle.Text = "КРУГИ";
             this.rdButt_Circle.UseVisualStyleBackColor = true;
             this.rdButt_Circle.CheckedChanged += new System.EventHandler(this.rdButt_Circle_CheckedChanged);
+            // 
+            // shapesList
+            // 
+            this.shapesList.BackColor = System.Drawing.SystemColors.Control;
+            this.shapesList.FormattingEnabled = true;
+            this.shapesList.Location = new System.Drawing.Point(406, 27);
+            this.shapesList.Name = "shapesList";
+            this.shapesList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.shapesList.Size = new System.Drawing.Size(171, 251);
+            this.shapesList.TabIndex = 2;
+            this.shapesList.SelectedIndexChanged += new System.EventHandler(this.shapesList_SelectedIndexChanged);
+            // 
+            // butt_ClearSelected
+            // 
+            this.butt_ClearSelected.Location = new System.Drawing.Point(406, 288);
+            this.butt_ClearSelected.Name = "butt_ClearSelected";
+            this.butt_ClearSelected.Size = new System.Drawing.Size(171, 23);
+            this.butt_ClearSelected.TabIndex = 3;
+            this.butt_ClearSelected.Text = "УДАЛИТЬ ВЫБРАННЫЕ";
+            this.butt_ClearSelected.UseVisualStyleBackColor = true;
+            this.butt_ClearSelected.Click += new System.EventHandler(this.butt_ClearSelected_Click);
+            // 
+            // butt_ClearAll
+            // 
+            this.butt_ClearAll.Location = new System.Drawing.Point(406, 317);
+            this.butt_ClearAll.Name = "butt_ClearAll";
+            this.butt_ClearAll.Size = new System.Drawing.Size(171, 23);
+            this.butt_ClearAll.TabIndex = 4;
+            this.butt_ClearAll.Text = "ОЧИСТИТЬ ВСЁ";
+            this.butt_ClearAll.UseVisualStyleBackColor = true;
+            this.butt_ClearAll.Click += new System.EventHandler(this.butt_ClearAll_Click);
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(589, 453);
+            this.Controls.Add(this.butt_ClearAll);
+            this.Controls.Add(this.shapesList);
             this.Controls.Add(this.grBox_Instruments);
+            this.Controls.Add(this.butt_ClearSelected);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(597, 0);
             this.Name = "MainScreen";
-            this.Text = "Form1";
+            this.Text = "MainScreen";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainScreen_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainScreen_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MainScreen_MouseMove);
@@ -421,6 +459,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.RadioButton rdButt_Circle;
+        private System.Windows.Forms.ListBox shapesList;
+        private System.Windows.Forms.Button butt_ClearAll;
+        private System.Windows.Forms.Button butt_ClearSelected;
 
     }
 }
