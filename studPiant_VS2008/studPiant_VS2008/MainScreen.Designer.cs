@@ -64,17 +64,19 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.rdButt_Circle = new System.Windows.Forms.RadioButton();
             this.grBox_Instruments.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grBox_Instruments
             // 
+            this.grBox_Instruments.Controls.Add(this.rdButt_Circle);
             this.grBox_Instruments.Controls.Add(this.rdButt_Lines);
             this.grBox_Instruments.Controls.Add(this.rdButt_Cross);
-            this.grBox_Instruments.Location = new System.Drawing.Point(438, 373);
+            this.grBox_Instruments.Location = new System.Drawing.Point(438, 349);
             this.grBox_Instruments.Name = "grBox_Instruments";
-            this.grBox_Instruments.Size = new System.Drawing.Size(139, 68);
+            this.grBox_Instruments.Size = new System.Drawing.Size(139, 92);
             this.grBox_Instruments.TabIndex = 0;
             this.grBox_Instruments.TabStop = false;
             this.grBox_Instruments.Text = "ИНСТРУМЕНТЫ";
@@ -345,6 +347,18 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // rdButt_Circle
+            // 
+            this.rdButt_Circle.AutoSize = true;
+            this.rdButt_Circle.Location = new System.Drawing.Point(6, 65);
+            this.rdButt_Circle.Name = "rdButt_Circle";
+            this.rdButt_Circle.Size = new System.Drawing.Size(53, 17);
+            this.rdButt_Circle.TabIndex = 2;
+            this.rdButt_Circle.TabStop = true;
+            this.rdButt_Circle.Text = "КРУГ";
+            this.rdButt_Circle.UseVisualStyleBackColor = true;
+            this.rdButt_Circle.CheckedChanged += new System.EventHandler(this.rdButt_Circle_CheckedChanged);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,6 +420,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.RadioButton rdButt_Circle;
 
     }
 }

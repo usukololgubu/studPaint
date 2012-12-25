@@ -18,11 +18,12 @@ namespace studPiant_VS2008
         Pen pMain = new Pen(Color.Black);
         Pen pTemp = new Pen(Color.Gray);
 
-        enum rdB_Positions {cross, line};
+        enum rdB_Positions { cross, line, circle };
         rdB_Positions Figures = new rdB_Positions();
 
         Boolean flagStart = false; //Флаг второй точки для линии
-        Point LS; //Поле для записи координат первой точки для линии
+        Point lineStart; //Поле для записи координат первой точки для линии
+        Point CircleCenter; //Поле для записи координат точки центра окружности
 
         public MainScreen()
         {
@@ -41,7 +42,20 @@ namespace studPiant_VS2008
                 case rdB_Positions.line:
                     if (!flagStart)
                     {
-                        LS = e.Location;
+                        lineStart = e.Location;
+                        flagStart = true;
+                    }
+                    else
+                    {
+                        addShape(tmpShape);
+                        flagStart = false;
+                        Refresh();
+                    }
+                    break;
+                case rdB_Positions.circle:
+                    if (!flagStart)
+                    {
+                        CircleCenter = e.Location;
                         flagStart = true;
                     }
                     else
@@ -88,6 +102,13 @@ namespace studPiant_VS2008
             Refresh();
         }
 
+        private void rdButt_Circle_CheckedChanged(object sender, EventArgs e)
+        {
+            Figures = rdB_Positions.circle;
+            tmpShape = null;
+            Refresh();
+        }
+
         private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string curFile = "allFigures"; //Имя файла для записи
@@ -122,6 +143,9 @@ namespace studPiant_VS2008
                     case "Line":
                         Shapes.Add(new Line(sr));
                         break;
+                    case "Circle":
+                        Shapes.Add(new Circle(sr));
+                        break;
                 }
             }
             sr.Close();
@@ -139,12 +163,24 @@ namespace studPiant_VS2008
                 case rdB_Positions.line:
                     if (!flagStart)
                     {
-                        LS = e.Location;
+                        lineStart = e.Location;
                         Refresh();
                     }
                     else
                     {
-                        tmpShape = new Line(LS, e.Location);
+                        tmpShape = new Line(lineStart, e.Location);
+                        Refresh();
+                    }
+                    break;
+                case rdB_Positions.circle:
+                    if (!flagStart)
+                    {
+                        CircleCenter = e.Location;
+                        Refresh();
+                    }
+                    else
+                    {
+                        tmpShape = new Circle(CircleCenter, e.Location);
                         Refresh();
                     }
                     break;
