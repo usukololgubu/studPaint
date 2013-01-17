@@ -13,6 +13,12 @@ namespace studPiant_VS2008
 
         public abstract void DrawWith(Graphics g, Pen p);
         public abstract void SaveTo(StreamWriter sw);
+        public abstract bool IsNearTo(Point C);
+
+        protected float getDistance(Point A, Point B)
+        {
+            return (float)Math.Sqrt(Math.Pow(A.X - B.X, 2) + Math.Pow(A.Y - B.Y, 2));
+        }
     }
 
     class Cross : Shape
@@ -50,6 +56,16 @@ namespace studPiant_VS2008
         {
             sw.WriteLine("Cross");
             sw.WriteLine(Convert.ToString(C.X) + " " + Convert.ToString(C.Y));
+        }
+
+        public override bool IsNearTo(Point _C)
+        {
+            Point tmpCross = new Point();
+            tmpCross.X = C.X;
+            tmpCross.Y = C.Y;
+
+            if (getDistance(tmpCross, _C) <= 2) return true;
+            else return false;
         }
     }
 
@@ -94,6 +110,16 @@ namespace studPiant_VS2008
             sw.WriteLine("Line");
             sw.WriteLine(Convert.ToString(S.X) + " " + Convert.ToString(S.Y));
             sw.WriteLine(Convert.ToString(F.X) + " " + Convert.ToString(F.Y));
+        }
+
+        public override bool IsNearTo(Point _C)
+        {
+            float AC = getDistance(S, _C);
+            float BC = getDistance(F, _C);
+            float AB = getDistance(S, F);
+
+            if (((AC + BC) - AB) <= 1) return true;
+            else return false;
         }
     }
 
@@ -145,6 +171,13 @@ namespace studPiant_VS2008
             sw.WriteLine("Circle");
             sw.WriteLine(Convert.ToString(C.X) + " " + Convert.ToString(C.Y));
             sw.WriteLine(Convert.ToString(onR.X) + " " + Convert.ToString(onR.Y));
+        }
+
+        public override bool IsNearTo(Point _C)
+        {
+            float R = this.Radius;
+            if ((getDistance(C, _C) - R) <= 2) return true;
+            else return false;
         }
     }
 }

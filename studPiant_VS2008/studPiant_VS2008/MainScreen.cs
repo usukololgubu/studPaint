@@ -13,7 +13,7 @@ namespace studPiant_VS2008
     public partial class MainScreen : Form
     {
         List<Shape> Shapes = new List<Shape>(); //Хранит все фигуры
-        Shape tmpShape; //Поле для хранения мнимой фигуры
+        Shape tmpShape; //Хранит мнимые фигуры
 
         Pen pMain = new Pen(Color.Black);
         Pen pTemp = new Pen(Color.Gray);
@@ -32,42 +32,55 @@ namespace studPiant_VS2008
 
         private void MainScreen_MouseDown(object sender, MouseEventArgs e)
         {
-            switch (Figures)
+            if (e.Button == MouseButtons.Left)
             {
-                case rdB_Positions.cross:
-                    flagStart = false;
-                    addShape(tmpShape);
-                    Refresh();
-                    break;
-                case rdB_Positions.line:
-                    if (!flagStart)
-                    {
-                        lineStart = e.Location;
-                        flagStart = true;
-                    }
-                    else
-                    {
-                        addShape(tmpShape);
+                switch (Figures)
+                {
+                    case rdB_Positions.cross:
                         flagStart = false;
-                        Refresh();
-                    }
-                    break;
-                case rdB_Positions.circle:
-                    if (!flagStart)
-                    {
-                        CircleCenter = e.Location;
-                        flagStart = true;
-                    }
-                    else
-                    {
                         addShape(tmpShape);
-                        flagStart = false;
                         Refresh();
-                    }
-                    break;
+                        break;
+                    case rdB_Positions.line:
+                        if (!flagStart)
+                        {
+                            lineStart = e.Location;
+                            flagStart = true;
+                        }
+                        else
+                        {
+                            addShape(tmpShape);
+                            flagStart = false;
+                            Refresh();
+                        }
+                        break;
+                    case rdB_Positions.circle:
+                        if (!flagStart)
+                        {
+                            CircleCenter = e.Location;
+                            flagStart = true;
+                        }
+                        else
+                        {
+                            addShape(tmpShape);
+                            flagStart = false;
+                            Refresh();
+                        }
+                        break;
+                }
+                //Shapes.Add(tmpShape);
+                this.Refresh();
             }
-            //Shapes.Add(tmpShape);
-            this.Refresh();
+            else if (e.Button == MouseButtons.Right)
+            {
+                foreach (Shape p in this.Shapes)
+                {
+                    if (p.IsNearTo(e.Location))
+                    {
+                        shapesList.SetSelected(Shapes.IndexOf(p), true);
+                    }
+                }
+            }
         }
 
         private void MainScreen_Paint(object sender, PaintEventArgs e)
@@ -77,8 +90,8 @@ namespace studPiant_VS2008
                 tmpShape.DrawWith(e.Graphics, pTemp);
             }
 
-            foreach (Shape p in this.Shapes)
-            { //Отрисовка готовых объектов
+            foreach (Shape p in this.Shapes) //Отрисовка готового объекта
+            { 
                 p.DrawWith(e.Graphics, pMain);
             }
         }
@@ -222,6 +235,12 @@ namespace studPiant_VS2008
             shapesList.Items.Clear();
             flagStart = false;
             tmpShape = null;
+            Refresh();
+        }
+
+        private void butt_CancelSelected_Click(object sender, EventArgs e)
+        {
+            shapesList.ClearSelected();
             Refresh();
         }
     }
